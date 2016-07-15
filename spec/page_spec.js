@@ -15,7 +15,7 @@ describe("page", function(){
     });
   });
 
-  it("has listings", function(done){
+  xit("has listings", function(done){
     p = page("https://generalassemb.ly/education?where=washington-dc");
     p.listings(function(listings){
       expect(listings.constructor.name).toBe("Array");
@@ -23,10 +23,18 @@ describe("page", function(){
     });
   });
 
-  it("writes listings to a file", function(done){
+  xit("writes listings to a file", function(done){
     p = page("https://generalassemb.ly/education?where=washington-dc");
     p.listings(function(listings){
-      expect(fs.readFileSync(__dirname + "/../data.json", "utf8")).toBe(JSON.stringify(listings));
+      expect(fs.readFileSync(__dirname + "/../new.json", "utf8")).toBe(JSON.stringify(listings));
+      done();
+    })
+  })
+
+  it("has a complement", function(done){
+    p = page("https://generalassemb.ly/education?where=washington-dc");
+    p.complement(function(complement){
+      expect(complement.length).toBe(1)
       done();
     })
   })
