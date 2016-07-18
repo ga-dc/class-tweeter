@@ -1,6 +1,7 @@
 var page = require('./page');
 var fs = require("fs");
-
+var env = require("./env.js");
+var Twitter = require("twitter")
 var p = page("https://generalassemb.ly/education?where=washington-dc");
 
 if(fs.existsSync(__dirname + "/new.json")) {
@@ -18,6 +19,14 @@ if(fs.existsSync(__dirname + "/new.json")) {
 
 p.listings(function (newListings) {
   p.complement(old.reverse(), newListings.reverse(), function (complement) {
-    console.log(complement);  // TODO: make twitter post with complement data
+    complement.forEach(function (c) {
+      if(c.title && c.date_description && c.time_description && c.url) {
+        var newStatus = c.title +  " " + c.date_description + " " + c.time_description + " " + c.url
+        var client = new Twitter(env)
+        client.post("statuses/update.json", {status: newStatus}, function (err, tweet, response) {
+          if (err) throw err;
+        })
+      }
+    })
   })
 })
