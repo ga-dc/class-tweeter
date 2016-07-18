@@ -15,7 +15,7 @@ describe("page", function(){
     });
   });
 
-  xit("has listings", function(done){
+  it("has listings", function(done){
     p = page("https://generalassemb.ly/education?where=washington-dc");
     p.listings(function(listings){
       expect(listings.constructor.name).toBe("Array");
