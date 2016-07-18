@@ -1,3 +1,4 @@
 node_modules
-*/old.json
-*/new.json
+*old.json
+*new.json
+env.js
