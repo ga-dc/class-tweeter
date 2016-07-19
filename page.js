@@ -17,9 +17,8 @@ var page = function(url){
       })
     },
     complement: function(old, neww, callback){
-
-      var complement = complement(old, neww, sorter)
-      callback(complement);
+      var com = complement(old, neww, sorter)
+      callback(com);
     }
   }
 }
@@ -27,6 +26,7 @@ var page = function(url){
 function complement(a1, a2, sorter){
   a1.sort(sorter)
   a2.sort(sorter)
+  // TODO: filter by event start
   return a2.filter(function(e,i){
     return JSON.stringify(a1[i]) != JSON.stringify(a2[i])
   })

@@ -29,7 +29,7 @@ function tweet (c) {
   if(c.title && c.date_description && c.time_description && c.url && c.image_url) {
     if (!c.url.includes("http")) c.url = "http://generalassemb.ly" + c.url
     var newStatus = c.title +  " " + c.date_description + " " + c.time_description + " " + c.url
-    var image = base64.encode(c.image_url, {}, function (err, response) {
+    base64.encode(c.image_url, {}, function (err, response) {
       if(err) console.log(err);
       var data = response.toString('base64')
       client.post('/media/upload.json', {media_data: data}, function (err, response) {
