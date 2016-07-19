@@ -17,12 +17,24 @@ var page = function(url){
       })
     },
     complement: function(old, neww, callback){
-      var complement = neww.filter(function(e, i){
-        return JSON.stringify(old[i]) != JSON.stringify(neww[i])
-      })
+
+      var complement = complement(old, neww, sorter)
       callback(complement);
     }
   }
 }
+
+function complement(a1, a2, sorter){
+  a1.sort(sorter)
+  a2.sort(sorter)
+  return a2.filter(function(e,i){
+    return JSON.stringify(a1[i]) != JSON.stringify(a2[i])
+  })
+}
+
+function sorter(a,b){
+  return a - b
+}
+
 
 module.exports = page;
