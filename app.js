@@ -22,7 +22,7 @@ p.listings(function (listings) {
 
 function tweet (listing) {
   if(listing.title && listing.date_description && listing.time_description && listing.url && listing.image_url) {
-    if (!listing.url.includes("http")) listing.url = "http://generalassemb.ly" + listing.url
+    if (!listing.url.match("http")) listing.url = "http://generalassemb.ly" + listing.url
     var newStatus = listing.title +  " " + listing.date_description + " " + listing.time_description + " " + listing.url
     base64.encode(listing.image_url, {}, function (err, response) {
       if(err) console.log(err);
